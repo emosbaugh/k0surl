@@ -5,7 +5,7 @@ k0surl configures and installs a [k0s](https://github.com/k0sproject/k0s) Kubern
 ## Installation
 
 ```bash
-./main.sh
+sudo ./main.sh
 ```
 
 ### With debug logging
