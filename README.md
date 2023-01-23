@@ -1,6 +1,6 @@
 # k0surl
 
-k0surl configures and installs a [k0s](https://github.com/k0sproject/k0s) Kubernetes cluster and a pre-configured set of add-ons to a set of servers using [k0sctl](https://github.com/k0sproject/k0sctl), [helm](https://github.com/helm/helm) and [kustomize](https://github.com/kubernetes-sigs/kustomize).
+k0surl configures and installs a [k0s](https://github.com/k0sproject/k0s) Kubernetes cluster and a pre-configured set of add-ons to a set of servers using [k0sctl](https://github.com/k0sproject/k0sctl) and [helm](https://github.com/helm/helm).
 
 ## Installation
 
