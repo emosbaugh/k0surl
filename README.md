@@ -35,3 +35,6 @@ sudo BUILD_DIR=./build INSTALL_DIR=./install ./main.sh
 ## Known limitations
 
 - Does not yet support multi-node clusters
+- Preflights and troubleshoot
+- Airgap with add-ons
+- E2E tests
