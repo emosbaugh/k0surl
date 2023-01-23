@@ -1,0 +1,20 @@
+- op: add
+  path: /spec/k0s/config/spec/extensions/helm/repositories/-
+  value:
+    name: openebs
+    url: https://openebs.github.io/charts
+- op: add
+  path: /spec/k0s/config/spec/extensions/helm/charts/-
+  value:
+    name: openebs-local-pv
+    chartname: openebs/openebs
+    version: "3.3.0"
+    namespace: openebs
+    values: |
+      localprovisioner:
+        enableDeviceClass: false
+        enableHostpathClass: true
+        basePath: /var/lib/replicated/openebs/local # TODO: template
+        hostpathClass:
+          name: local
+          isDefaultClass: true

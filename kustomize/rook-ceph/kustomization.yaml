@@ -1,0 +1,11 @@
+resources:
+- cluster.yaml
+- toolbox.yaml
+- rbd-storageclass.yaml
+- object.yaml
+- object-user.yaml
+
+patchesStrategicMerge:
+- cluster.patch.yaml
+- rbd-storageclass.patch.yaml
+- object.patch.yaml

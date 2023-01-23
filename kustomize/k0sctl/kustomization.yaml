@@ -1,0 +1,22 @@
+resources:
+- cluster.yaml
+
+patchesJson6902:
+- target:
+    group: k0sctl.k0sproject.io
+    version: v1beta1
+    kind: Cluster
+    name: k0s
+  path: helm-openebs.patch.yaml
+- target:
+    group: k0sctl.k0sproject.io
+    version: v1beta1
+    kind: Cluster
+    name: k0s
+  path: helm-rook.patch.yaml
+- target:
+    group: k0sctl.k0sproject.io
+    version: v1beta1
+    kind: Cluster
+    name: k0s
+  path: helm-kots.patch.yaml
