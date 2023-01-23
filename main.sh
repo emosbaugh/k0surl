@@ -6,10 +6,11 @@ DEBUG=${DEBUG:-false}
 
 CWD="$(pwd)"
 
-BUILD_DIR=${BUILD_DIR:-/etc/replicated}
-INSTALL_DIR=${INSTALL_DIR:-/var/lib/replicated}
+BUILD_DIR=${BUILD_DIR:-./build}
+INSTALL_DIR=${INSTALL_DIR:-./install}
 
 source src/common.sh
+source src/kubectl.sh
 source src/kustomize.sh
 source src/k0sctl.sh
 source src/rook.sh
@@ -33,6 +34,7 @@ function main() {
     init_install_dir
 
     pushd "$install_dir" >/dev/null
+    install_kubectl
     install_kustomize
     install_k0sctl
     popd >/dev/null
@@ -40,6 +42,7 @@ function main() {
     pushd "$build_dir" >/dev/null
     build_k0sctl
     apply_k0sctl
+    export_kubeconfig_k0sctl
     popd >/dev/null
 
     pushd "$build_dir" >/dev/null

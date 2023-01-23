@@ -5,19 +5,13 @@ k0surl configures and installs a [k0s](https://github.com/k0sproject/k0s) Kubern
 ## Installation
 
 ```bash
-sudo ./main.sh
+./main.sh
 ```
 
 ### With debug logging
 
 ```bash
-sudo DEBUG=true ./main.sh
-```
-
-### Changing the build and install directories
-
-```bash
-sudo BUILD_DIR=./build INSTALL_DIR=./install ./main.sh
+DEBUG=true ./main.sh
 ```
 
 ## Add-ons

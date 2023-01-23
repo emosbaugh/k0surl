@@ -9,5 +9,19 @@ function build_rook_ceph() {
 
 function apply_rook_ceph() {
     log "applying rook-ceph cluster resources"
-    k0s kubectl apply -f rook-ceph.yaml
+    "$KUBECTL_BIN" apply -f rook-ceph.yaml
+}
+
+function rook_wait_for_crds() {
+    log "waiting for rook-ceph CRDs to be ready"
+    while ! rook_crds_available >/dev/null 2>&1 ; do
+        sleep 1
+    done
+}
+
+function rook_crds_available() {
+    "$KUBECTL_BIN" wait --for=condition=established --timeout=60s crd/cephclusters.ceph.rook.io
+    "$KUBECTL_BIN" wait --for=condition=established --timeout=60s crd/cephblockpools.ceph.rook.io
+    "$KUBECTL_BIN" wait --for=condition=established --timeout=60s crd/cephobjectstores.ceph.rook.io
+    "$KUBECTL_BIN" wait --for=condition=established --timeout=60s crd/cephobjectstoreusers.ceph.rook.io
 }

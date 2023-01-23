@@ -26,3 +26,9 @@ function apply_k0sctl() {
     log "applying k0s cluster"
     "$K0SCTL_BIN" apply -c k0s-cluster.yaml --debug="$DEBUG"
 }
+
+function export_kubeconfig_k0sctl() {
+    "$K0SCTL_BIN" kubeconfig -c k0s-cluster.yaml > kubeconfig.yaml
+    export KUBECONFIG
+    KUBECONFIG="$(pwd)/kubeconfig.yaml"
+}
