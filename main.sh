@@ -7,7 +7,7 @@ DEBUG=${DEBUG:-false}
 CWD="$(pwd)"
 
 BUILD_DIR=${BUILD_DIR:-./build}
-INSTALL_DIR=${INSTALL_DIR:-./install}
+BIN_DIR=${BIN_DIR:-./bin}
 
 source src/common.sh
 source src/kubectl.sh
@@ -20,20 +20,19 @@ function init_build_dir() {
     chmod -R 755 "$build_dir"
 }
 
-function init_install_dir() {
-    mkdir -p "$install_dir"
-    chmod -R 755 "$install_dir"
+function init_bin_dir() {
+    mkdir -p "$bin_dir"
+    chmod -R 755 "$bin_dir"
 }
 
 function main() {
-    local build_dir=, install_dir=
-    build_dir="$(realpath "$BUILD_DIR")"
-    install_dir="$(realpath "$INSTALL_DIR")"
+    local build_dir="${BUILD_DIR:-./build}"
+    local bin_dir="${BIN_DIR:-./bin}"
 
     init_build_dir
-    init_install_dir
+    init_bin_dir
 
-    pushd "$install_dir" >/dev/null
+    pushd "$bin_dir" >/dev/null
     install_kubectl
     install_kustomize
     install_k0sctl
