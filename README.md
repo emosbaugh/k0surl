@@ -29,6 +29,7 @@ sudo BUILD_DIR=./build INSTALL_DIR=./install ./main.sh
 | registry | todo |
 | prometheus | todo |
 | velero | todo |
+| kots | yes |
 | ... | todo |
 
 ## Known limitations
