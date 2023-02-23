@@ -37,6 +37,7 @@ function prompt() {
     set -e
 }
 
+ASSUME_YES=${ASSUME_YES:-0}
 function confirmN() {
     printf "(y/N) "
     if [ "$ASSUME_YES" = "1" ]; then

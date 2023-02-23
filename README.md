@@ -12,6 +12,32 @@ k0surl configures and installs a [k0s](https://github.com/k0sproject/k0s) Kubern
 
 ### With custom hosts
 
+Example hosts.patch.yaml file with a controller and two workers:
+
+```yaml
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: k0s
+spec:
+  hosts:
+    - role: controller
+      ssh:
+        address: 35.247.41.116
+        user: ethan
+        keyPath: ~/.ssh/id_ed25519
+    - role: worker
+      ssh:
+        address: 34.234.21.65
+        user: ethan
+        keyPath: ~/.ssh/id_ed25519
+    - role: worker
+      ssh:
+        address: 35.237.129.32
+        user: ethan
+        keyPath: ~/.ssh/id_ed25519
+```
+
 ```bash
 HOSTS_PATCH_FILE=./hosts.patch.yaml ./main.sh
 ```
