@@ -3,17 +3,9 @@ kind: Cluster
 metadata:
   name: k0s
 spec:
-  hosts:
-    - role: controller+worker
-      ssh:
-        address: 127.0.0.1
-      localhost:
-        enabled: true
-      noTaints: true
-      installFlags: &installFlags
-        - --disable-components konnectivity-server
+  hosts: []
   k0s:
-    version: v1.26.0+k0s.0
+    version: v1.25.6+k0s.0
     config:
       apiVersion: k0s.k0sproject.io/v1beta1
       kind: ClusterConfig

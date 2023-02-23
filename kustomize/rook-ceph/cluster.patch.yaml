@@ -5,7 +5,7 @@ metadata:
   namespace: rook-ceph
 spec:
   dataDirHostPath: /var/lib/replicated/rook # TODO: template
-  mon:
-    count: 1
-  mgr:
-    count: 1
+  # mon:
+  #   count: 1
+  # mgr:
+  #   count: 1

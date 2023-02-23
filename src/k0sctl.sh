@@ -19,7 +19,14 @@ function install_k0sctl() {
 
 function build_k0sctl() {
     log "building k0s cluster"
-    "$KUSTOMIZE_BIN" build "$CWD"/kustomize/k0sctl/ > k0s-cluster.yaml
+    local tmp_dir=
+    tmp_dir="$(mktemp -d)"
+    cp -r "$KUSTOMIZE_DIR"/k0sctl/* "$tmp_dir"
+    if [ -n "$HOSTS_PATCH_FILE" ]; then
+        cp "$HOSTS_PATCH_FILE" "$tmp_dir"/hosts.patch.yaml
+    fi
+    "$KUSTOMIZE_BIN" build "$tmp_dir" > k0s-cluster.yaml
+    rm -rf "$tmp_dir"
 }
 
 function apply_k0sctl() {

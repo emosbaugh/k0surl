@@ -4,7 +4,7 @@ set -euo pipefail
 
 function build_rook_ceph() {
     log "building rook-ceph cluster resources"
-    "$KUSTOMIZE_BIN" build "$CWD"/kustomize/rook-ceph/ > rook-ceph.yaml
+    "$KUSTOMIZE_BIN" build "$KUSTOMIZE_DIR"/rook-ceph/ > rook-ceph.yaml
 }
 
 function apply_rook_ceph() {

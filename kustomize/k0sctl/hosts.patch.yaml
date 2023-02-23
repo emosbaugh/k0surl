@@ -1,0 +1,12 @@
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: k0s
+spec:
+  hosts:
+    - role: controller+worker
+      ssh:
+        address: 127.0.0.1
+      localhost:
+        enabled: true
+      noTaints: true

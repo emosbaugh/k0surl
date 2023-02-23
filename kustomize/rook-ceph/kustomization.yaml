@@ -7,5 +7,5 @@ resources:
 
 patchesStrategicMerge:
 - cluster.patch.yaml
-- rbd-storageclass.patch.yaml
-- object.patch.yaml
+# - rbd-storageclass.patch.yaml
+# - object.patch.yaml

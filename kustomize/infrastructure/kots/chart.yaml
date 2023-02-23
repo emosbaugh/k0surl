@@ -1,0 +1,32 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: admin-console
+spec:
+  type: "oci"
+  interval: 1m0s
+  url: oci://registry.replicated.com/library
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: admin-console
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: admin-console
+      version: "1.94.2"
+      sourceRef:
+        kind: HelmRepository
+        name: admin-console
+  install:
+    remediation:
+      retries: 5
+  values:
+    password: admin # TODO $ADMIN_CONSOLE_PASSWORD
+    minimalRBAC: false
+    isHelmManaged: false
+    service:
+      type: ClusterIP
