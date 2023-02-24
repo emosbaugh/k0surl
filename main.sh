@@ -34,6 +34,7 @@ function init_bin_dir() {
 
 function maybe_prompt_localhost() {
     if [ -n "$HOSTS_PATCH_FILE" ]; then
+        # realpath requires "brew install coreutils" on macOS
         HOSTS_PATCH_FILE="$(realpath "$HOSTS_PATCH_FILE")"
         log "using hosts patch $HOSTS_PATCH_FILE"
     else
