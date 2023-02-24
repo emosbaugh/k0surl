@@ -11,7 +11,12 @@ function install_k0sctl() {
         return
     fi
     rm -f k0sctl
-    curl -fsSL -o k0sctl https://github.com/k0sproject/k0sctl/releases/download/"$K0SCTL_VERSION"/k0sctl-linux-x64
+    # shellcheck disable=SC2153
+    local arch="$ARCH"
+    if [ "$arch" = "amd64" ]; then
+        arch="x64"
+    fi
+    curl -fsSL -o k0sctl https://github.com/k0sproject/k0sctl/releases/download/"$K0SCTL_VERSION"/k0sctl-"$OS"-"$arch"
     chmod +x k0sctl
     K0SCTL_BIN="$(pwd)/k0sctl"
     log "k0sctl installed to $K0SCTL_BIN"

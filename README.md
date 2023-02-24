@@ -48,7 +48,7 @@ HOSTS_PATCH_FILE=./hosts.patch.yaml ./main.sh
 DEBUG=true ./main.sh
 ```
 
-### Resetting the cluster
+## Resetting the cluster
 
 ```bash
 ./reset.sh

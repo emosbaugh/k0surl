@@ -13,6 +13,7 @@ KUSTOMIZE_DIR="$CWD/kustomize"
 HOSTS_PATCH_FILE=${HOSTS_PATCH_FILE:-}
 
 source src/common.sh
+source src/binutils.sh
 source src/kubectl.sh
 source src/kustomize.sh
 source src/k0sctl.sh
@@ -51,6 +52,7 @@ function main() {
     init_bin_dir
 
     maybe_prompt_localhost
+    detect_os_arch
 
     pushd "$bin_dir" >/dev/null
     install_kubectl

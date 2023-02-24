@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
+# shellcheck disable=SC2034
 GREEN='\033[0;32m'
+# shellcheck disable=SC2034
 NC='\033[0m' # No Color
 
 function log() {

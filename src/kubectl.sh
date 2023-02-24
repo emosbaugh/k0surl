@@ -11,7 +11,8 @@ function install_kubectl() {
         return
     fi
     rm -f kustomize
-    curl -fsSLO https://dl.k8s.io/release/"$KUBECTL_VERSION"/bin/linux/amd64/kubectl
+    curl -fsSLO https://dl.k8s.io/release/"$KUBECTL_VERSION"/bin/"$OS"/"$ARCH"/kubectl
+
     chmod +x kubectl
     KUBECTL_BIN="$(pwd)/kubectl"
     log "kubectl installed to $KUBECTL_BIN"
