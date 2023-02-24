@@ -4,4 +4,4 @@ labels:
 - pairs:
     kurl.sh/infra: "true"
 resources:
-- openebs
+- admin-console
