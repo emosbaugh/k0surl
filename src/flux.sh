@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-FLUX_VERSION=${FLUX_VERSION:-v0.40.0}
+FLUX_VERSION=${FLUX_VERSION:-0.40.1}
 FLUX_BIN=${FLUX_BIN:-}
 
 function install_flux() {
@@ -11,7 +11,7 @@ function install_flux() {
         return
     fi
     rm -f flux
-    curl -s https://raw.githubusercontent.com/fluxcd/flux2/"$FLUX_VERSION"/install/flux.sh | bash -s "$(pwd)"
+    curl -fsSL https://raw.githubusercontent.com/fluxcd/flux2/v"$FLUX_VERSION"/install/flux.sh | FLUX_VERSION="$FLUX_VERSION" bash -s "$(pwd)" 1>/dev/null
     FLUX_BIN="$(pwd)/flux"
     log "flux installed to $FLUX_BIN"
 }

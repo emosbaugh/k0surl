@@ -7,7 +7,7 @@ k0surl configures and installs a [k0s](https://github.com/k0sproject/k0s) Kubern
 ### Localhost
 
 ```bash
-./main.sh
+./install.sh
 ```
 
 ### With custom hosts
@@ -39,13 +39,25 @@ spec:
 ```
 
 ```bash
-HOSTS_PATCH_FILE=./hosts.patch.yaml ./main.sh
+HOSTS_PATCH_FILE=./hosts.patch.yaml ./install.sh
 ```
 
 ### With debug logging
 
 ```bash
-DEBUG=true ./main.sh
+DEBUG=true ./install.sh
+```
+
+### Output the default configuration
+
+```bash
+BUILD_DIR=~/build ./config.sh
+```
+
+### With custom configuration
+
+```bash
+CONFIG_DIR=~/build ./install.sh
 ```
 
 ## Resetting the cluster

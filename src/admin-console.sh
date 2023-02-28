@@ -12,11 +12,11 @@ function wait_for_admin_console() {
     done
 }
 
-function outro() {
+function admin_console_outro() {
     printf "\n%bYou can access the Admin Console at http://localhost:%s with password \"%s\" %b\n\n" \
         "$GREEN" "$ADMIN_CONSOLE_PORT" "$ADMIN_CONSOLE_PASSWORD" "$NC"
 }
 
-function port_forward() {
+function admin_console_port_forward() {
     ( set -x; "$KUBECTL_BIN" port-forward service/admin-console "$ADMIN_CONSOLE_PORT:80" )
 }

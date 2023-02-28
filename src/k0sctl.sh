@@ -23,7 +23,7 @@ function install_k0sctl() {
 }
 
 function build_k0sctl() {
-    log "building k0s cluster"
+    log "building k0s config"
     local tmp_dir=
     tmp_dir="$(mktemp -d)"
     cp -r "$KUSTOMIZE_DIR"/k0sctl/* "$tmp_dir"
@@ -37,6 +37,24 @@ function build_k0sctl() {
 function apply_k0sctl() {
     log "applying k0s cluster"
     "$K0SCTL_BIN" apply -c k0s-cluster.yaml --debug="$DEBUG"
+}
+
+function hosts_patch_file_realpath() {
+    if [ -n "$HOSTS_PATCH_FILE" ]; then
+        # realpath requires "brew install coreutils" on macOS
+        realpath "$HOSTS_PATCH_FILE"
+    fi
+}
+
+function maybe_prompt_localhost() {
+    if [ -n "$HOSTS_PATCH_FILE" ]; then
+        log "using hosts patch $HOSTS_PATCH_FILE"
+    else
+        printf "using localhost, continue? "
+        if ! confirmN ; then
+            bail "refusing to use localhost"
+        fi
+    fi
 }
 
 function export_kubeconfig_k0sctl() {
