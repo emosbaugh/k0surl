@@ -29,7 +29,10 @@ function main() {
         log "using config from $CONFIG_DIR"
         BUILD_DIR="$CONFIG_DIR"
     else
-        HOSTS_PATCH_FILE="$(hosts_patch_file_realpath)"
+        if [ -n "$HOSTS_PATCH_FILE" ]; then
+            # realpath requires "brew install coreutils" on macOS
+            HOSTS_PATCH_FILE="$(realpath "$HOSTS_PATCH_FILE")"
+        fi
         maybe_prompt_localhost
     fi
 

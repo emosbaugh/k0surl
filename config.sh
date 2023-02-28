@@ -22,13 +22,16 @@ source src/admin-console.sh
 source src/phase.sh
 
 function main() {
-    HOSTS_PATCH_FILE="$(hosts_patch_file_realpath)"
+    if [ -n "$HOSTS_PATCH_FILE" ]; then
+        # realpath requires "brew install coreutils" on macOS
+        HOSTS_PATCH_FILE="$(realpath "$HOSTS_PATCH_FILE")"
+    fi
     maybe_prompt_localhost
 
     phase_install
     phase_build
 
-    log "Default config output to $(realpath "$BUILD_DIR")"
+    log "default config output to $(realpath "$BUILD_DIR")"
 }
 
 main "$@"

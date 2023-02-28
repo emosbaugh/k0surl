@@ -39,13 +39,6 @@ function apply_k0sctl() {
     "$K0SCTL_BIN" apply -c k0s-cluster.yaml --debug="$DEBUG"
 }
 
-function hosts_patch_file_realpath() {
-    if [ -n "$HOSTS_PATCH_FILE" ]; then
-        # realpath requires "brew install coreutils" on macOS
-        realpath "$HOSTS_PATCH_FILE"
-    fi
-}
-
 function maybe_prompt_localhost() {
     if [ -n "$HOSTS_PATCH_FILE" ]; then
         log "using hosts patch $HOSTS_PATCH_FILE"
