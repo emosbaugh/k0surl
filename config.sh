@@ -23,8 +23,11 @@ source src/phase.sh
 
 function main() {
     HOSTS_PATCH_FILE="$(hosts_patch_file_realpath)"
+    maybe_prompt_localhost
+
     phase_install
     phase_build
+
     log "Default config output to $(realpath "$BUILD_DIR")"
 }
 

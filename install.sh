@@ -25,12 +25,12 @@ source src/admin-console.sh
 source src/phase.sh
 
 function main() {
-    HOSTS_PATCH_FILE="$(hosts_patch_file_realpath)"
-    maybe_prompt_localhost
-
     if [ -n "$CONFIG_DIR" ]; then
         log "using config from $CONFIG_DIR"
         BUILD_DIR="$CONFIG_DIR"
+    else
+        HOSTS_PATCH_FILE="$(hosts_patch_file_realpath)"
+        maybe_prompt_localhost
     fi
 
     phase_install
