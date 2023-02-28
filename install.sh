@@ -40,7 +40,6 @@ function main() {
     if [ -z "$CONFIG_DIR" ]; then
         phase_build
     fi
-    phase_build
     phase_apply
 
     admin_console_outro
