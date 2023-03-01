@@ -12,23 +12,35 @@ CONFIG_DIR=${CONFIG_DIR:-}
 HOSTS_PATCH_FILE=${HOSTS_PATCH_FILE:-}
 
 source src/common.sh
+source src/binutils.sh
+source src/kubectl.sh
+source src/kustomize.sh
+source src/k0sctl.sh
+source src/flux.sh
+source src/infra.sh
+source src/apps.sh
+source src/admin-console.sh
+source src/phase.sh
+
+KUSTOMIZE_DIR="$PWD/kustomize"
 
 function reset() {
     if [ -n "$CONFIG_DIR" ]; then
+        log "using config from $CONFIG_DIR"
         BUILD_DIR="$CONFIG_DIR"
+    else
+        if [ -n "$HOSTS_PATCH_FILE" ]; then
+            # realpath requires "brew install coreutils" on macOS
+            HOSTS_PATCH_FILE="$(realpath "$HOSTS_PATCH_FILE")"
+        fi
+        maybe_prompt_localhost
     fi
 
-    pushd "$RENDER_DIR" >/dev/null
-    render_k0sctl
-    popd >/dev/null
-
-    if [ ! -f "$RENDER_DIR"/cluster.yaml ]; then
-        bail "no cluster config found, skipping reset"
+    phase_install
+    if [ -z "$CONFIG_DIR" ]; then
+        phase_build
     fi
-
-    pushd "$BIN_DIR" >/dev/null
-    install_k0sctl
-    popd >/dev/null
+    phase_render
 
     pushd "$RENDER_DIR" >/dev/null
     reset_k0sctl
