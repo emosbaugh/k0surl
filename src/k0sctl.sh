@@ -24,19 +24,22 @@ function install_k0sctl() {
 
 function build_k0sctl() {
     log "building k0s config"
-    local tmp_dir=
-    tmp_dir="$(mktemp -d)"
-    cp -r "$KUSTOMIZE_DIR"/k0sctl/* "$tmp_dir"
-    if [ -n "$HOSTS_PATCH_FILE" ]; then
-        cp "$HOSTS_PATCH_FILE" "$tmp_dir"/hosts.patch.yaml
+    if [ ! -d cluster ]; then
+        cp -r "$KUSTOMIZE_DIR"/cluster cluster
     fi
-    "$KUSTOMIZE_BIN" build "$tmp_dir" > k0s-cluster.yaml
-    rm -rf "$tmp_dir"
+    if [ -n "$HOSTS_PATCH_FILE" ]; then
+        cp "$HOSTS_PATCH_FILE" cluster/hosts.patch.yaml
+    fi
+}
+
+function render_k0sctl() {
+    log "rendering k0s config"
+    "$KUSTOMIZE_BIN" build "$BUILD_DIR"/cluster/ > cluster.yaml
 }
 
 function apply_k0sctl() {
     log "applying k0s cluster"
-    "$K0SCTL_BIN" apply -c k0s-cluster.yaml --debug="$DEBUG"
+    "$K0SCTL_BIN" apply -c cluster.yaml --debug="$DEBUG"
 }
 
 function maybe_prompt_localhost() {
@@ -51,7 +54,7 @@ function maybe_prompt_localhost() {
 }
 
 function export_kubeconfig_k0sctl() {
-    "$K0SCTL_BIN" kubeconfig -c k0s-cluster.yaml > kubeconfig.yaml
+    "$K0SCTL_BIN" kubeconfig -c cluster.yaml > kubeconfig.yaml
     export KUBECONFIG
     KUBECONFIG="$(pwd)/kubeconfig.yaml"
 }

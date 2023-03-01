@@ -4,7 +4,14 @@ set -euo pipefail
 
 function build_infra() {
     log "building infra config"
-    "$KUSTOMIZE_BIN" build "$KUSTOMIZE_DIR"/infrastructure/ > infrastructure.yaml
+    if [ ! -d infrastructure ]; then
+        cp -r "$KUSTOMIZE_DIR"/infrastructure infrastructure
+    fi
+}
+
+function render_infra() {
+    log "rendering infra config"
+    "$KUSTOMIZE_BIN" build "$BUILD_DIR"/infrastructure/ > infrastructure.yaml
 }
 
 function apply_infra() {

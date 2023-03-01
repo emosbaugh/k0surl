@@ -1,0 +1,12 @@
+# THIS FILE IS GENERATED, DO NOT MODIFY THIS FILE
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- cluster.yaml
+# - target:
+#     group: k0sctl.k0sproject.io
+#     version: v1beta1
+#     kind: Cluster
+#     name: k0s
+#   path: helm-rook.patch.yaml

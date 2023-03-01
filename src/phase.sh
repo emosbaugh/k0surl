@@ -2,22 +2,16 @@
 
 set -euo pipefail
 
-function init_build_dir() {
-    mkdir -p "$build_dir"
-    chmod -R 755 "$build_dir"
-}
-
 function init_bin_dir() {
-    mkdir -p "$bin_dir"
-    chmod -R 755 "$bin_dir"
+    mkdir -p "$BIN_DIR"
+    chmod -R 755 "$BIN_DIR"
 }
 
 function phase_install() {
-    local bin_dir="${BIN_DIR:-./bin}"
     init_bin_dir
     detect_os_arch
 
-    pushd "$bin_dir" >/dev/null
+    pushd "$BIN_DIR" >/dev/null
     install_kubectl
     install_kustomize
     install_k0sctl
@@ -25,22 +19,46 @@ function phase_install() {
     popd >/dev/null
 }
 
+function init_build_dir() {
+    mkdir -p "$BUILD_DIR"
+    chmod -R 755 "$BUILD_DIR"
+}
+
+function build_base() {
+    rm -rf base
+    cp -r "$KUSTOMIZE_DIR"/base base
+}
+
 function phase_build() {
-    local build_dir="${BUILD_DIR:-./build}"
     init_build_dir
 
-    pushd "$build_dir" >/dev/null
+    pushd "$BUILD_DIR" >/dev/null
+    build_base
     build_k0sctl
     build_infra
     build_apps
     popd >/dev/null
 }
 
-function phase_apply() {
-    local build_dir="${BUILD_DIR:-./build}"
-    init_build_dir
+function init_render_dir() {
+    mkdir -p "$RENDER_DIR"
+    chmod -R 755 "$RENDER_DIR"
+}
 
-    pushd "$build_dir" >/dev/null
+function phase_render() {
+    init_render_dir
+
+    pushd "$RENDER_DIR" >/dev/null
+    render_k0sctl
+    render_infra
+    render_apps
+    popd >/dev/null
+}
+
+function phase_apply() {
+    init_render_dir
+
+    pushd "$RENDER_DIR" >/dev/null
     apply_k0sctl
     export_kubeconfig_k0sctl
     apply_flux

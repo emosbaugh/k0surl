@@ -2,15 +2,13 @@
 
 set -euo pipefail
 
+# arguments
+
 DEBUG=${DEBUG:-false}
-
-CWD="$(pwd)"
-
-BUILD_DIR=${BUILD_DIR:-./build}
+BUILD_DIR=${BUILD_DIR:-./build/config}
+RENDER_DIR=${RENDER_DIR:-./build/render}
 BIN_DIR=${BIN_DIR:-./bin}
-KUSTOMIZE_DIR="$CWD/kustomize"
 CONFIG_DIR=${CONFIG_DIR:-}
-
 HOSTS_PATCH_FILE=${HOSTS_PATCH_FILE:-}
 
 source src/common.sh
@@ -23,6 +21,8 @@ source src/infra.sh
 source src/apps.sh
 source src/admin-console.sh
 source src/phase.sh
+
+KUSTOMIZE_DIR="$PWD/kustomize"
 
 function main() {
     if [ -n "$CONFIG_DIR" ]; then
@@ -40,6 +40,7 @@ function main() {
     if [ -z "$CONFIG_DIR" ]; then
         phase_build
     fi
+    phase_render
     phase_apply
 
     admin_console_outro

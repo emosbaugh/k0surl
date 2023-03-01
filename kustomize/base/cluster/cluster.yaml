@@ -1,3 +1,5 @@
+# THIS FILE IS GENERATED, DO NOT MODIFY THIS FILE
+---
 apiVersion: k0sctl.k0sproject.io/v1beta1
 kind: Cluster
 metadata:

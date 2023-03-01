@@ -1,0 +1,9 @@
+# THIS FILE IS GENERATED, DO NOT MODIFY THIS FILE
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+labels:
+- pairs:
+    kurl.sh/infra: "true"
+resources:
+- admin-console

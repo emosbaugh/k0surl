@@ -42,22 +42,22 @@ spec:
 HOSTS_PATCH_FILE=./hosts.patch.yaml ./install.sh
 ```
 
-### With debug logging
-
-```bash
-DEBUG=true ./install.sh
-```
-
 ### Output the default configuration
 
 ```bash
-BUILD_DIR=~/build ./config.sh
+CONFIG_DIR=~/mycluser ./config.sh
 ```
 
 ### With custom configuration
 
 ```bash
-CONFIG_DIR=~/build ./install.sh
+CONFIG_DIR=~/mycluser ./install.sh
+```
+
+### With debug logging
+
+```bash
+DEBUG=true ./install.sh
 ```
 
 ## Resetting the cluster
