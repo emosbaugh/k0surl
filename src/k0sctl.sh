@@ -42,6 +42,11 @@ function apply_k0sctl() {
     "$K0SCTL_BIN" apply -c cluster.yaml --debug="$DEBUG"
 }
 
+function reset_k0sctl() {
+    log "resetting k0s cluster"
+    "$K0SCTL_BIN" reset -c cluster.yaml --debug="$DEBUG"
+}
+
 function maybe_prompt_localhost() {
     if [ -n "$HOSTS_PATCH_FILE" ]; then
         log "using hosts patch $HOSTS_PATCH_FILE"
