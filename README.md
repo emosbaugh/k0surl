@@ -2,12 +2,12 @@
 
 k0surl configures and installs a [k0s](https://github.com/k0sproject/k0s) Kubernetes cluster and a pre-configured set of add-ons to a set of servers using [k0sctl](https://github.com/k0sproject/k0sctl) and [helm](https://github.com/helm/helm).
 
-## Installation
+## Applying changes to the cluster
 
 ### Localhost
 
 ```bash
-./install.sh
+./apply.sh
 ```
 
 ### With custom hosts
@@ -39,7 +39,7 @@ spec:
 ```
 
 ```bash
-HOSTS_PATCH_FILE=./hosts.patch.yaml ./install.sh
+HOSTS_PATCH_FILE=./hosts.patch.yaml ./apply.sh
 ```
 
 ### Output the default configuration
@@ -51,13 +51,13 @@ CONFIG_DIR=~/mycluser ./config.sh
 ### With custom configuration
 
 ```bash
-CONFIG_DIR=~/mycluser ./install.sh
+CONFIG_DIR=~/mycluser ./apply.sh
 ```
 
 ### With debug logging
 
 ```bash
-DEBUG=true ./install.sh
+DEBUG=true ./apply.sh
 ```
 
 ## Resetting the cluster

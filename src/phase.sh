@@ -58,6 +58,10 @@ function phase_render() {
 function phase_apply() {
     init_render_dir
 
+    pushd "$BUILD_DIR" >/dev/null
+    git_confirm_and_commit
+    popd >/dev/null
+
     pushd "$RENDER_DIR" >/dev/null
     apply_k0sctl
     export_kubeconfig_k0sctl

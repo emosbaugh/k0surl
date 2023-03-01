@@ -21,6 +21,7 @@ source src/infra.sh
 source src/apps.sh
 source src/admin-console.sh
 source src/phase.sh
+source src/git.sh
 
 KUSTOMIZE_DIR="$PWD/kustomize"
 
