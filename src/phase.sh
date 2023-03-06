@@ -48,10 +48,13 @@ function init_render_dir() {
 function phase_render() {
     init_render_dir
 
+    local build_dir
+    build_dir="$(realpath "$BUILD_DIR")"
+
     pushd "$RENDER_DIR" >/dev/null
-    render_k0sctl
-    render_infra
-    render_apps
+    render_k0sctl "$build_dir"
+    render_infra "$build_dir"
+    render_apps "$build_dir"
     popd >/dev/null
 }
 

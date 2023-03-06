@@ -33,8 +33,9 @@ function build_k0sctl() {
 }
 
 function render_k0sctl() {
+    local build_dir="$1"
     log "rendering k0s config"
-    "$KUSTOMIZE_BIN" build "$BUILD_DIR"/cluster/ > cluster.yaml
+    "$KUSTOMIZE_BIN" build "$build_dir"/cluster/ > cluster.yaml
 }
 
 function apply_k0sctl() {

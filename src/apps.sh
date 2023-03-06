@@ -10,8 +10,9 @@ function build_apps() {
 }
 
 function render_apps() {
+    local build_dir="$1"
     log "rendering app config"
-    "$KUSTOMIZE_BIN" build "$BUILD_DIR"/apps/ > apps.yaml
+    "$KUSTOMIZE_BIN" build "$build_dir"/apps/ > apps.yaml
 }
 
 function apply_apps() {

@@ -10,8 +10,9 @@ function build_infra() {
 }
 
 function render_infra() {
+    local build_dir="$1"
     log "rendering infra config"
-    "$KUSTOMIZE_BIN" build "$BUILD_DIR"/infrastructure/ > infrastructure.yaml
+    "$KUSTOMIZE_BIN" build "$build_dir"/infrastructure/ > infrastructure.yaml
 }
 
 function apply_infra() {

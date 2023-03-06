@@ -29,6 +29,8 @@ function git_has_init() {
 function git_init() {
     if [ ! -d .git ]; then
         git init
+        git config --local user.name "k0surl"
+        git config --local user.email "k0surl@replicated"
     fi
 }
 
