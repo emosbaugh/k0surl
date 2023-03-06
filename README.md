@@ -60,6 +60,14 @@ CONFIG_DIR=~/mycluser ./apply.sh
 DEBUG=true ./apply.sh
 ```
 
+## Accessing the cluster
+
+```
+$ export KUBECONFIG=./build/render/kubeconfig.yaml
+$ ./bin/kubectl get nodes
+...
+```
+
 ## Resetting the cluster
 
 ```bash
